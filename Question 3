@@ -1,0 +1,69 @@
+class PolynomialSolver:
+	def solve(self,n,A,method):
+            def derivative(f, x, h):
+                return (f(x+h) - f(x-h)) / (2.0*h)
+            def f(x):
+                value=0.0
+                for i in range len(A):
+                    value+=A[i]*x**i
+                return value 
+            if(method=='bisection'):
+                        print("Enter lower bound of interval in which root lies")  
+                        l=int(input())
+                        print("Enter upper bound of interval in which root lies")
+                        u=int(input())
+			maxit=100
+                        h=0.01
+                        j=1
+                        while (u-l)>h and j<maxit :
+                            m=(u+l)/2
+                            if f(m)*f(l)<0:
+                                u=m
+                            else:
+                                l=m
+                            j=j+1
+                        return [l,u]
+			
+		if(method=='secant'):
+			print("Enter lower bound of interval in which root lies")
+			l=int(input())
+			print("Enter upper bound of interval in which root lies")
+			u=int(input())
+			maxit=100
+                        h=0.001
+                        j=1
+			while (u-l)>h and j<maxit :
+                            temp=u
+                            u=(u-l)*f(u)/(f(u)-f(l))
+                            l=temp
+                            j=j+1
+                        return u
+		if(method=='secantRF'):
+			print("Enter lower bound of interval in which root lies")
+			l=int(input())
+			print("Enter upper bound of interval in which root lies")
+			u=int(input())
+                        maxit=100
+			h=0.001
+                        j=1
+                        while f(u)*f(l)>0 and j<maxit:
+                            temp=u
+                            u=(u-l)*f(u)/(f(u)-f(l))
+                            l=temp
+                            j=j+1
+                        return u
+		if(method=='newtonraphson'):
+			print("Enter lower bound of interval in which root lies")
+			l=int(input())
+			lastX = l
+			h=0.001
+                        j=1
+			maxit=100
+                        nextX = lastX + 10* h 
+                        while (abs(lastX - nextX) > h) and j<maxit:  
+                            newY = f(nextX)                       
+                            lastX = nextX
+                            nextX = lastX - newY / derivative(f, lastX, h)  
+                        return nextX
+		else:
+			return NULL
