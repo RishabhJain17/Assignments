@@ -58,5 +58,5 @@ class LPsolver():
 
 lps=LPsolver()
 solution=lps.solve(objective,constraint1,constraint2)
-print solution
+print (solution)
 
