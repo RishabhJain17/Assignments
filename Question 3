@@ -4,7 +4,7 @@ class PolynomialSolver:
                 return (f(x+h) - f(x-h)) / (2.0*h)
             def f(x):
                 value=0.0
-                for i in range len(A):
+                for i in range (len(A)):
                     value+=A[i]*x**i
                 return value 
             if(method=='bisection'):
